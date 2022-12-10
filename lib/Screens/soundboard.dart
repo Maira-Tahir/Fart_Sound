@@ -1,111 +1,136 @@
 import 'package:fart_sounds/AppUtils/ColorConstant.dart';
+import 'package:fart_sounds/Models/SoundModel.dart';
 import 'package:flutter/material.dart';
 
-class SoundBoard extends StatelessWidget {
+class SoundBoard extends StatefulWidget {
   SoundBoard({Key? key}) : super(key: key);
-  List<String> names = [
-    'fart 1',
-    'fart 2',
-    'fart 3',
-    'fart 4',
-    'fart 5',
-    'fart 6',
-    'fart 7',
-    'fart 8',
-    'fart 9',
-    'fart 10',
-    'fart 11',
-    'fart 12',
-    'fart 13',
-    'fart 14',
-    'fart 15'
-  ];
+
+  @override
+  State<SoundBoard> createState() => _SoundBoardState();
+}
+
+class _SoundBoardState extends State<SoundBoard> {
+  List<SoundModel> soundList = [];
+
+  Color _favIconColor = Colors.grey;
+
+  @override
+  void initState() {
+    super.initState();
+    setupList();
+  }
+
+  void setupList() {
+    for (int i = 0; i < 15; i++) {
+      soundList.add(SoundModel(name: 'fart $i', isFav: false, isShare: false));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BackgroundColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            GridView.builder(
-                shrinkWrap: true,
-                itemCount: 15,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: (MediaQuery.of(context).size.width / 1.2) /
-                      (MediaQuery.of(context).size.height / 1.9),
-                  mainAxisSpacing: 6.0,
-                  crossAxisSpacing: 6.0,
-                ),
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.13,
-                          width: MediaQuery.of(context).size.width * 0.23,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: lightBlueColor,
-                          ),
-                          child: Column(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+            shrinkWrap: true,
+            itemCount: soundList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, mainAxisSpacing: 10),
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.13,
+                      width: MediaQuery.of(context).size.width * 0.25,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: lightBlueColor,
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5.0, top: 5),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: const Image(
-                                          image: AssetImage('assets/snd.png'),
-                                        ),
-                                      )),
-                                  const SizedBox(
-                                    width: 25,
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    if (soundList[index].isShare) {
+                                      soundList[index].isShare = false;
+                                    } else {
+                                      soundList[index].isShare = true;
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  height: 25,
+                                  width: 25,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: soundList[index].isShare
+                                          ? Colors.green
+                                          : Colors.white,
+                                      shape: BoxShape.circle),
+                                  child: const Icon(
+                                    Icons.share,
+                                    size: 14,
                                   ),
-                                  Padding(
-                                      padding: const EdgeInsets.only(top: 5),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: const Image(
-                                          image: AssetImage('assets/like.png'),
-                                        ),
-                                      )),
-                                ],
+                                ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Image(
-                                    image: AssetImage('assets/image.png'),
+                              const Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    if (soundList[index].isFav) {
+                                      soundList[index].isFav = false;
+                                    } else {
+                                      soundList[index].isFav = true;
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  height: 25,
+                                  width: 25,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: soundList[index].isFav
+                                          ? Colors.green
+                                          : Colors.white,
+                                      shape: BoxShape.circle),
+                                  child: Icon(
+                                    soundList[index].isFav
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    size: 14,
                                   ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                        Text(names[index])
-                      ],
+                          const SizedBox(
+                            height: 0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Image(
+                                image: AssetImage('assets/image.png'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  );
-                }),
-          ],
-        ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(soundList[index].name)
+                ],
+              );
+            }),
       ),
     );
   }

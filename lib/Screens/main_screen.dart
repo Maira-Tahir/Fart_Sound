@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:fart_sounds/AppUtils/ColorConstant.dart';
 import 'package:fart_sounds/Screens/Fart.dart';
 import 'package:fart_sounds/Screens/Settings.dart';
@@ -17,64 +16,87 @@ class Main_Screen extends StatefulWidget {
 class _Main_ScreenState extends State<Main_Screen>
     with TickerProviderStateMixin {
   late TabController _tabController;
+  int selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
-    _tabController.animateTo(2);
+    _tabController = TabController(length: 4, vsync: this);
+    _tabController.animateTo(0);
   }
 
   @override
+  var isPlaying = false;
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          height: 60,
-          backgroundColor: BackgroundColor,
-          items: const <Widget>[
-            Icon(Icons.shopping_cart, size: 30, color: Colors.grey),
-            Icon(Icons.play_circle_fill_outlined, size: 30, color: Colors.blue),
-            Icon(Icons.favorite, size: 30, color: Colors.grey),
-          ],
-          onTap: (index) {
-            //Handle button tap
-          },
-        ),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.blue,
+            child: Padding(
+              padding: EdgeInsets.only(top: 0, right: 10, bottom: 10),
+              child: IconButton(
+                  // alignment: Alignment.topCenter,
+                  icon: isPlaying
+                      ? Icon(
+                          Icons.pause,
+                          size: 40.0,
+                        )
+                      : Icon(Icons.play_arrow, size: 40.0),
+                  onPressed: () {
+                    setState(() {
+                      isPlaying = !isPlaying;
+                    });
+                  }),
+            ),
+            onPressed: () {}),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: AppBar(
           bottom: TabBar(
             labelColor: Colors.blue,
             unselectedLabelColor: Colors.grey,
             controller: _tabController,
+            onTap: (index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
             tabs: const [
               Tab(
-                text: "Soundboard",
+                child: Text("Soundboard",
+                    style: TextStyle(fontSize: 10, color: Colors.black)),
               ),
               Tab(
-                text: "Symphony of Farts",
+                child: Text("Symphony of Farts",
+                    style: TextStyle(fontSize: 10, color: Colors.black)),
               ),
               Tab(
-                text: "Fart-o-mizer",
+                child: Text("Fart-o-mizer",
+                    style: TextStyle(fontSize: 10, color: Colors.black)),
               ),
               Tab(
-                text: "Fave-o-fart",
+                child: Text("Fave-o-fart",
+                    style: TextStyle(fontSize: 10, color: Colors.black)),
               ),
             ],
           ),
-          title: Text('500+ Fart Sounds',
+          title: const Text('500+ Fart Sounds',
               style: TextStyle(
-                  color: textColor, fontSize: 30, fontWeight: FontWeight.bold)),
+                  color: textColor, fontSize: 25, fontWeight: FontWeight.bold)),
           actions: [
             InkWell(
               onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Settings()),
+                MaterialPageRoute(builder: (context) => const Settings()),
               ),
-              child: Icon(
-                Icons.settings,
-                color: textColor,
-                size: 40,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Icon(
+                  Icons.settings,
+                  color: textColor,
+                  size: 25,
+                ),
               ),
             )
           ],
@@ -85,10 +107,43 @@ class _Main_ScreenState extends State<Main_Screen>
           children: [
             SoundBoard(),
             Symphony(),
-            Fart(),
-            Fav(),
-            // Put widgets here
+            fart(),
+            fav(),
           ],
+        ),
+        bottomNavigationBar: SizedBox(
+          height: 60.0,
+          child: BottomAppBar(
+              shape: const CircularNotchedRectangle(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 58.0),
+                    child: IconButton(
+                      icon: Icon(Icons.shopping_cart, size: 30),
+                      onPressed: () {},
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 58.0),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.favorite,
+                        size: 30,
+                        color: selectedIndex == 3 ? textColor : Colors.black,
+                      ),
+                      onPressed: () {
+                        _tabController.animateTo(3);
+                        setState(() {
+                          selectedIndex = 3;
+                        });
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => fav()));
+                      },
+                    ),
+                  ),
+                ],
+              )),
         ),
       ),
     );

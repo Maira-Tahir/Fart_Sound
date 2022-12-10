@@ -27,101 +27,119 @@ class _SettingsState extends State<Settings> {
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 25)),
-        actions: const [
-          Icon(
-            Icons.settings,
-            color: Colors.black,
-          )
-        ],
       ),
       backgroundColor: BackgroundColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 10.0, right: 10, top: 20),
         child: Column(
           children: [
-            Container(
-              height: 60,
-              width: 400,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: const ListTile(
-                leading: Image(
-                  width: 35,
-                  height: 35,
-                  image: AssetImage('assets/1.png'),
+            InkWell(
+              onTap: () {
+                print("Contianer is tapped.");
+              },
+              child: Container(
+                height: 60,
+                width: 400,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: const ListTile(
+                  leading: Image(
+                    width: 35,
+                    height: 35,
+                    image: AssetImage('assets/1.png'),
+                  ),
+                  title: Text('Premium Version',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                  subtitle: Text('No Ads'),
                 ),
-                title: Text('Premium Version',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                subtitle: Text('No Ads'),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Container(
-              height: 60,
-              width: 400,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: const ListTile(
-                leading: Image(
-                  width: 35,
-                  height: 35,
-                  image: AssetImage('assets/2.jpg'),
+            InkWell(
+              onTap: () {
+                print("Contianer is tapped.");
+              },
+              child: Container(
+                height: 60,
+                width: 400,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: const ListTile(
+                  leading: Image(
+                    width: 35,
+                    height: 35,
+                    image: AssetImage('assets/2.jpg'),
+                  ),
+                  title: Text('Restore Purchase',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                  subtitle: Text('Restore past purchase'),
                 ),
-                title: Text('Restore Purchase',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                subtitle: Text('Restore past purchase'),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Container(
-              height: 60,
-              width: 400,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: const ListTile(
-                leading: Image(
-                  width: 35,
-                  height: 35,
-                  image: AssetImage('assets/rate.png'),
+            InkWell(
+              onTap: () {
+                print("Contianer is tapped.");
+              },
+              child: Container(
+                height: 60,
+                width: 400,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: const ListTile(
+                  leading: Image(
+                    width: 35,
+                    height: 35,
+                    image: AssetImage('assets/rate.png'),
+                  ),
+                  title: Text('Rate Us',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                  subtitle: Text('Tell us what you think'),
                 ),
-                title: Text('Rate Us',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                subtitle: Text('Tell us what you think'),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Container(
-              height: 60,
-              width: 400,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: const ListTile(
-                leading: Image(
-                  width: 35,
-                  height: 35,
-                  image: AssetImage('assets/more.png'),
+            InkWell(
+              onTap: () {
+                print("Contianer is tapped.");
+              },
+              child: Container(
+                height: 60,
+                width: 400,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: const ListTile(
+                  leading: Image(
+                    width: 35,
+                    height: 35,
+                    image: AssetImage('assets/more.png'),
+                  ),
+                  title: Text('More Apps',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                  subtitle: Text('Look our other apps'),
                 ),
-                title: Text('More Apps',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                subtitle: Text('Look our other apps'),
               ),
             ),
             const SizedBox(
@@ -136,22 +154,28 @@ class _SettingsState extends State<Settings> {
             const SizedBox(
               height: 20,
             ),
-            Container(
-              height: 60,
-              width: 400,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: const ListTile(
-                leading: Image(
-                  width: 40,
-                  height: 40,
-                  image: AssetImage('assets/copy.png'),
+            InkWell(
+              onTap: () {
+                print("Contianer is tapped.");
+              },
+              child: Container(
+                height: 60,
+                width: 400,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: const ListTile(
+                  leading: Image(
+                    width: 40,
+                    height: 40,
+                    image: AssetImage('assets/copy.png'),
+                  ),
+                  title: Text('Sound effects abtained from',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold)),
                 ),
-                title: Text('Sound effects abtained from',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold)),
               ),
             ),
           ],
